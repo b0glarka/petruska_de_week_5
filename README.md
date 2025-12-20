@@ -1,8 +1,9 @@
-# petruska_de_week_5
+# EU AI Act - Media Sentiment Analysis
+
 ## DE 1 Assignment 3 Exercises to Get Your Feet Wet
 
 Date - December 19 2025\
-Students - Boga Petruska, Bence Szabo\
+Students - Boga Petruska (2508898), Bence Szabo\
 Class - ECBS5146: Data Science 1, Fall 2025
 
 ## Configuration
@@ -32,20 +33,20 @@ The goal was to determine if local media outlets in these regions perceive the l
 
 **Methodology:**
 
-* Collection: Automated web scraping of 20 news articles using a curated URL list.
+* Collection: Automated web scraping of 20 news articles using a curated URL list using BeautifulSoup.
 
-* Processing: Normalizing multilingual data by translating non-English content into English.
+* Processing: Normalizing multilingual data by translating non-English content into English use AWS Translate
 
-* Analysis: Applying Natural Language Processing (NLP) to quantify sentiment. Because neutral sentences dominate long-form reporting, article sentiment was determined using average sentiment intensity (a ±0.05 threshold between Positive and Negative) rather than simple majority sentence labels.
+* Analysis: Applying Natural Language Processing  to quantify sentiment. Because neutral sentences dominate long-form reporting, article sentiment was determined using average sentiment intensity (a ±0.05 threshold between Positive and Negative) rather than simple majority sentence labels. We used AWS Comprehend.
 
-* Archiving: Storing processed records in a structured JSON format for longitudinal study.
+* Archiving: Storing processed records in a structured JSON format for future longitudinal study in AWS S3 storage.
 
 
 ## Data Sources
 The study utilized a curated list of URLs targeting high-impact news coverage of the AI Act.
 | Language | Article Count | Sample Outlets                                      |
 |-----------|----------------|---------------------------------------------------|
-| English (en)  | 7 | BBC, CNN, Bruegel, China Observers                       |
+| English (en)  | 7 | BBC, CNN, Telegraph,  Bruegel, China Observers                       |
 | German (de)   | 7 | Zeit, Deutschlandfunk, Der Standard, T3N                 |
 | Hungarian (hu)| 6 | Telex, Magyar Nemzet, ICT Global, HWSW                   |
 
@@ -222,12 +223,12 @@ The following trends were observed in the sentiment distribution:
 * Overall Distribution: The sentiment is rarely purely "Positive." Most articles fall into the Neutral or Mixed categories, reflecting the complex, multifaceted nature of high-stakes technology regulation.
 
 ## AWS Service Cost Breakdown
-This project utilized several AWS cloud services. Below is a breakdown of the costs incurred for the analysis of 20 articles (7 English, 13 requiring translation) with an average length of 6,000 characters.
+This project utilized several AWS cloud services. Below is a breakdown of the costs incurred for the analysis of 20 articles (7 English, 13 requiring translation) with an average length of 6,000 characters.  During the course of development of this project, we estimate we performed 10 trials using the AWS services while coding and troubleshooting.
 
 | Service          | Calculation                                           | Estimated Cost |
 |------------------|-------------------------------------------------------|----------------|
-| Amazon Translate | 13 articles × 6,000 chars = 78,000 chars ($15/1M)     | $1.17          |
-| Amazon Comprehend| 20 articles × 6,000 chars = 120,000 chars ($1/1M)     | $0.12          |
-| Amazon S3        | 20 PUT requests + minimal storage                     | $0.0001        |
-| **Total per Run**| —                                                     | **~$1.29**     |
+| Amazon Translate | 13 articles × 6,000 chars = 78,000 chars x $0.000015 USD / character = $1.17 USD, approx 10 trials    | $11.70          |
+| Amazon Comprehend| 20 articles × 6,000 chars = 120,000 chars = 1,200 Units x $0.0001 USD / unit = $0.12 USD, approx 10 trials     | $1.20          |
+| Amazon S3 Standard       | ~1.5 MB storage, $23 / TB                     | $0.0000345         |
+| **Total per Run**| —                                                     | **~$12.87**     |
 
