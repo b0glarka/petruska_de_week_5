@@ -3,7 +3,7 @@
 ## DE 1 Assignment 3 Exercises to Get Your Feet Wet
 
 Date - December 19 2025\
-Students - Boga Petruska (2508898), Bence Szabo\
+Students - Boga Petruska (2508898), Bence Szabo (2508584)\
 Class - ECBS5146: Data Science 1, Fall 2025
 
 ## Configuration
